@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Monte Hall!</title>
+  <style>
+	@import url(https://fonts.googleapis.com/css?family=Montserrat);
+  	body{
+  		color: #d0937e;
+  		font-family: 'Montserrat', sans-serif;
+  		text-align: center;
+  		-webkit-perspective: 500px; /* Chrome, Safari, Opera */
+    	perspective: 500px;
+  	}
+  	.door{
+  		color: #6b764e;
+  		display: inline-block;
+  		height: 300px;
+  		width: 150px;
+  		background-color: #77ba8f;
+  		margin: 30px;
+  	}
+  	#first{
+  		-webkit-transform-origin: right center;
+  		transform-origin: right center;
+  		-webkit-transform: rotateY(15deg);
+  		transform: rotateY(15deg);
+  	}
+  	#third{
+  		-webkit-transform-origin: left center;
+  		transform-origin: left center;
+  		-webkit-transform: rotateY(-15deg);
+  		transform: rotateY(-15deg);
+  	}
+  	.door:hover{
+  		border:10px solid #b4dfcb;
+  		margin: 20px;
+  	}
+  	.open{
+  		background-color: blue;
+  		height: 300px;
+  		width: 150px;
+  	}
+  </style>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+	<h1>Monte Hall!</h1>
+	<div class="door" id="first">
+		<div class="open">first</div>
+	</div>
+  	<div class="door" id="second">second</div>
+  	<div class="door" id="third">thirds</div>
+  	<h2>Pick a door</h2>
+  	<script></script>
+</body>
+</html>
