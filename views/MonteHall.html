@@ -5,58 +5,111 @@
   <meta charset="utf-8">
   <title>Monte Hall!</title>
   <style>
-	@import url(https://fonts.googleapis.com/css?family=Montserrat);
-  	body{
-  		color: #d0937e;
-  		font-family: 'Montserrat', sans-serif;
-  		text-align: center;
-  		-webkit-perspective: 500px; /* Chrome, Safari, Opera */
-    	perspective: 500px;
-  	}
-  	.door{
-  		color: #6b764e;
-  		display: inline-block;
-  		height: 300px;
-  		width: 150px;
-  		background-color: #77ba8f;
-  		margin: 30px;
-  	}
-  	#first{
-  		-webkit-transform-origin: right center;
-  		transform-origin: right center;
-  		-webkit-transform: rotateY(15deg);
-  		transform: rotateY(15deg);
-  	}
-  	#third{
-  		-webkit-transform-origin: left center;
-  		transform-origin: left center;
-  		-webkit-transform: rotateY(-15deg);
-  		transform: rotateY(-15deg);
-  	}
-  	.door:hover{
-  		border:10px solid #b4dfcb;
-  		margin: 20px;
-  	}
-  	.open{
-  		background-color: #a0e8fc;
-  		height: 300px;
-  		width: 150px;
-  		-webkit-transform-origin: left center;
-  		transform-origin: left center;
-  		-webkit-transform: rotateY(15deg);
-  		transform: rotateY(15deg);
-  	}
+  @import url(https://fonts.googleapis.com/css?family=Montserrat);
+    body{
+      display: float;
+      color: #d0937e;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      background-color: #EEE9D5;
+      -webkit-perspective: 3000px; /* Chrome, Safari, Opera */
+      perspective: 3000px;
+    }
+    .unit{
+      clear: left;
+      position: absolute;
+      height: 24vw;
+      width: 24vw;
+      background-color: #EAAA47;
+      border-radius: 50%;
+    }
+    .unit#one{
+      top: 10vw;
+      left: 6vw;
+    }
+    .unit#two{
+      top: 10vw;
+      left: 36vw;
+    }
+    .unit#three{
+      top: 10vw;
+      left: 66vw;
+    }
+    .door{
+      position: absolute;
+      top: 3vw;
+      left: 8vw;
+      background-color: #E66D27;
+      height: 18vw;
+      width: 8vw;
+      -webkit-transform: rotateY(10deg);
+      transform: rotateY(10deg)
+    }
+    #one > .door{
+      -webkit-transform: rotateY(10deg);
+      transform: rotateY(10deg)
+    }
+    #three > .door{
+      -webkit-transform: rotateY(-10deg);
+      transform: rotateY(-10deg)
+    }
+    #swing:hover{
+      background-color: #E66D27;
+      -webkit-transform-origin: left center;
+      transform-origin: left center;
+      animation: doorswing 2s ease-in-out infinite alternate;
+      -webkit-animation: doorswing 2s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    #back{
+      background-color: #A6988A;
+    }
+    @keyframes doorswing{
+      from{-webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);}
+      to{-webkit-transform: rotateY(-100deg);
+      transform: rotateY(-100deg);}
+    }
+    @-webkit-keyframes doorswing{
+      from{-webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);}
+      to{-webkit-transform: rotateY(-100deg);
+      transform: rotateY(-100deg);}
+    }
+    .knob{
+      position: absolute;
+      background-color: #5b3917;
+      height: 1vw;
+      width: 1vw;
+      border-radius: 50%;
+      top: 9vw;
+      left: 6vw;
+    }
   </style>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-	<h1>Monte Hall!</h1>
-	<div class="door" id="first">
-		<div class="open">first</div>
-	</div>
-  	<div class="door" id="second">second</div>
-  	<div class="door" id="third">thirds</div>
-  	<h2>Pick a door</h2>
-  	<script></script>
+  <h1>Monte Hall!</h1>
+  <div class="unit" id="one">
+    <div class="door" id="back"></div>
+    <div class="door" id="swing">
+      <div class="knob"></div>
+    </div>
+    
+  </div>
+  <div class="unit" id="two">
+    <div class="door" id="back"></div>
+    <div class="door" id="swing">
+      <div class="knob"></div>
+    </div>
+  </div>
+   <div class="unit" id="three">
+    <div class="door" id="back"></div>
+    <div class="door" id="swing">
+      <div class="knob"></div>
+    </div>
+  </div>
+    <h2>Pick a door</h2>
+    <script></script>
 </body>
 </html>
