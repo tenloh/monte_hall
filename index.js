@@ -13,7 +13,10 @@ var path = require('path');
 //SETTING UP ROUTING
 var app = express();
 
+//LOGGING
 app.use(morgan('dev'));
+
+//BODY PARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -81,6 +84,8 @@ app.use(function(err, req, res, next){
 });
 
 
+
+//SYNCING DATABASES (OR CLEAR) BEFORE SETTING PORT LIVE
 models.db.sync({force: true})
 .then(function(content){
   // console.log(content);
@@ -97,6 +102,11 @@ models.db.sync({force: true})
 var setUpGame = function(){
   carDoor = Math.ceil(Math.random() * 3);
   firstGuess == null;
+}
+
+
+module.exports = {
+  setUpGame: setUpGame,
 }
 
 
