@@ -55,11 +55,7 @@ describe('Monte Hall Game Play Tests', function(){
 
 		});
 
-		it('Shows winner if the car is behind First Click and Ends Game', function(){
-
-		});
-
-		it('Displays a different door if player did not choose right door', function(){
+		it('opens the non-selected door with a goat', function(){
 
 		});
 
@@ -67,7 +63,7 @@ describe('Monte Hall Game Play Tests', function(){
 
 		});
 
-		it('Allows a new door/same door to be clicked as second door', function(){
+		it('Allows a non-open door to be clicked as second door', function(){
 
 		});
 
