@@ -99,14 +99,14 @@ models.db.sync({force: true})
 
 
 //Set up Game
-var setUpGame = function(){
+var startGame = function(){
   carDoor = Math.ceil(Math.random() * 3);
   firstGuess == null;
 }
 
 
 module.exports = {
-  setUpGame: setUpGame,
+  startGame: startGame,
 }
 
 

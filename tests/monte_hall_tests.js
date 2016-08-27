@@ -5,7 +5,7 @@ var spies = require('chai-spies');
 var monte = require('../index.js');
 var monteDB = require('../routes/monteDB.js');
 
-beforeEach('Reset DB and Add Pink Floyd User', function(done){
+beforeEach('Reset DB', function(done){
 	monteDB.db.sync({force: true})
 	.then(function(){
 		done();
@@ -37,13 +37,31 @@ describe('Monte Hall Game Play Tests', function(){
 		});
 
 
-		it('Creates a User if it doesnt exist', function(){
+		it('Creates a User if it doesnt exist', function(done){
 			var user = 'Pink Floyd';
+			monteDB.User.create({
+				name: user
+			}).
+			then(function(response){
+				expect(response.name).to.be.equal('Pink Floyd');
+				done();
+			}).catch(done);
 
 		});
 
-		it('Asks users to enter name in the beginning', function(){
-
+		it('Cannot take a blank name', function(){
+			//Don't know how to test this -- need front end testing
+			var name = '';
+			monteDB.User.create({
+				name: name
+			})
+			.then(function(response){
+				expect(response).to.be.equal(null);
+				done();
+			}).catch(function(err){
+				expect(err).to.be.not.equal(null);
+				done();
+			});
 		})
 
 	});
@@ -51,20 +69,27 @@ describe('Monte Hall Game Play Tests', function(){
 
 	describe('Game Play', function(){
 
-		it('Allows a user to click a first door', function(){
+		var newGame = monte.startGame();
+		var winningDoor = newGame.winningDoor;
 
+		it('Allows a user to click a first door and stores it', function(){
+			var input = '1';
+			newGame.chooseDoor(input);
+			expect(newGame.firstGuess).to.be.equal('1');
 		});
 
-		it('opens the non-selected door with a goat', function(){
+		it('opens a non-selected door with a goat and not the chosen door', function(){
+			expect(newGame.revealedDoor).to.not.be.equal(winningDoor);
+			expect(newGame.revealedDoor).to.not.be.equal(input);
+		});
 
+		it('Prompts User If They Want to Switch?', function(){
+			// expect(newGame)
 		});
 
 		it('Disallows user to click revealed door', function(){
-
-		});
-
-		it('Allows a non-open door to be clicked as second door', function(){
-
+			var click = winningDoor;
+			expect(newGame.chooseDoor(winningDoor)).to.throw(Error);
 		});
 
 		it('Displays result if winner', function(){
