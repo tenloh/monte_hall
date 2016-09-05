@@ -29,18 +29,19 @@ game.controller('MainCtrl', function ($scope, GameFactory) {
 
     $scope.guess = function (doorNumber) {
         if ($scope.firstGuess === -1) {
+            console.log('doorNumber', doorNumber);
             $scope.firstGuess = doorNumber;
             revealDoor();
         } else {
             //This is second guess
-            isWinner(doorNumber);
+            $scope.win = isWinner(doorNumber);
         }
     }
 
     $scope.saveGame = function () {
         var data = {
             switch: $scope.switch,
-            winner: $scope.winner,
+            winner: $scope.win,
             user: $scope.user
         }
         GameFactory.save(data)
@@ -54,5 +55,6 @@ game.controller('MainCtrl', function ($scope, GameFactory) {
         $scope.firstGuess = -1;
         $scope.switch = false;
         $scope.revealDoor = -1;
+        $scope.win = false;
     }
 });

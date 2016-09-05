@@ -92,28 +92,29 @@
   <script src="/js/gameFactory.js" defer></script>
   <script src="/js/gameController.js" defer></script>
 </head>
-<body ng-app="gameApp">
+<body ng-app="gameApp" ng-controller="MainCtrl">
   <h1>Monte Hall!</h1>
-  <div class="unit" id="one">
+  <div class="unit" id="one" ng-click="guess(1)">
     <div class="door" id="back"></div>
     <div class="door" id="swing">
       <div class="knob"></div>
     </div>
     
   </div>
-  <div class="unit" id="two">
+  <div class="unit" id="two" ng-click="guess(2)">
     <div class="door" id="back"></div>
     <div class="door" id="swing">
       <div class="knob"></div>
     </div>
   </div>
-   <div class="unit" id="three">
+   <div class="unit" id="three" ng-click="guess(3)">
     <div class="door" id="back"></div>
     <div class="door" id="swing">
       <div class="knob"></div>
     </div>
   </div>
-    <h2>Pick a door</h2>
+    <button ng-click="startGame()">Start Game</button>
+    <h2 ng-show="carDoor !== -1">Pick a door</h2>
     <script></script>
 </body>
 </html>
