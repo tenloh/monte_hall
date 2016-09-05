@@ -87,8 +87,12 @@
     }
   </style>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="/angular/angular.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/gameFactory.js" defer></script>
+  <script src="/js/gameController.js" defer></script>
 </head>
-<body>
+<body ng-app="gameApp">
   <h1>Monte Hall!</h1>
   <div class="unit" id="one">
     <div class="door" id="back"></div>

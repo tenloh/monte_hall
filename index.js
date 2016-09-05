@@ -31,47 +31,36 @@ app.engine('html', swig.renderFile);
 swig.setDefaults({cache: false});
 
 app.use(express.static(path.join(__dirname, '/views')));
+app.use(express.static(path.join(__dirname, '/node_modules')));
+app.use(express.static(path.join(__dirname, '/browser')));
 
-var game,
-    user,
-    carDoor,
-    firstGuess;
+// app.get('/:name', function(req, res, next){
+//   setUpGame();
+//   User.create({
+//     name: req.params.name
+//   })
+//   .then(function(userResponse){
+//     user = userResponse;
+//     return Game.create({
+//       carDoor: 1
+//     }).then(function(gameResponse){
+//       game = gameResponse;
+//       gameResponse.setPlayer(userResponse.id);
+//     });
+//   })
+//   .then(function(response){
+//       //res.send('Hello, ' + user.name + '.You have reached Monte Hall Web App!');
+//       res.render('MonteHall');
+//   })
+//   .catch(next);
 
+//   //res.send('Hello, you've reached the Monte Hall Web App!);
+// });
 app.get('/', function(req, res, next){
-  setUpGame();
-  User.create({
-    name: 'Ten Loh Test'
-  })
-  .then(function(userResponse){
-    user = userResponse;
-    return Game.create({
-      carDoor: 1
-    }).then(function(gameResponse){
-      game = gameResponse;
-      gameResponse.setPlayer(userResponse.id);
-    });
-  })
-  .then(function(response){
-      //res.send('Hello, ' + user.name + '.You have reached Monte Hall Web App!');
-      res.render('MonteHall');
-  })
-  .catch(next);
-
-  //res.send('Hello, you've reached the Monte Hall Web App!);
-
+  res.render('MonteHall.html');
 });
 
-app.post('/guess', function(req, res, next){
-  var guess = req.body.guess;
-  game.firstGuess = guess;
-  if(guess === carDoor){
-    game.won = true;
-  }
-  game.save()
-  .then(function(response){
-    res.send('You have won!');
-  })
-  .catch(next);
+app.post('/save', function(req, res, next){
 });
 
 
@@ -97,17 +86,7 @@ models.db.sync({force: true})
   console.error(err)
 })
 
-
-//Set up Game
-var startGame = function(){
-  carDoor = Math.ceil(Math.random() * 3);
-  firstGuess == null;
-}
-
-
-module.exports = {
-  startGame: startGame,
-}
+module.exports = app;
 
 
 
