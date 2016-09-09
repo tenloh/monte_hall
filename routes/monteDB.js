@@ -33,13 +33,13 @@ var Game = db.define('game', {
   doorShown: {
     type: Sequelize.INTEGER
   },
-  switched: {
-    type: Sequelize.INTEGER
+  switch: {
+    type: Sequelize.BOOLEAN
   },
   carDoor: {
     type: Sequelize.INTEGER
   },
-  won: {
+  win: {
     type: Sequelize.BOOLEAN
   }
 });

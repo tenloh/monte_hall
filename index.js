@@ -34,39 +34,26 @@ app.use(express.static(path.join(__dirname, '/views')));
 app.use(express.static(path.join(__dirname, '/node_modules')));
 app.use(express.static(path.join(__dirname, '/browser')));
 
-// app.get('/:name', function(req, res, next){
-//   setUpGame();
-//   User.create({
-//     name: req.params.name
-//   })
-//   .then(function(userResponse){
-//     user = userResponse;
-//     return Game.create({
-//       carDoor: 1
-//     }).then(function(gameResponse){
-//       game = gameResponse;
-//       gameResponse.setPlayer(userResponse.id);
-//     });
-//   })
-//   .then(function(response){
-//       //res.send('Hello, ' + user.name + '.You have reached Monte Hall Web App!');
-//       res.render('MonteHall');
-//   })
-//   .catch(next);
+app.get('/favicon.ico', function(req, res, next){
+  next();
+})
 
-//   //res.send('Hello, you've reached the Monte Hall Web App!);
-// });
-app.get('/', function(req, res, next){
+app.get('/*', function(req, res, next){
   res.render('MonteHall.html');
 });
 
 app.post('/save', function(req, res, next){
+  console.log('req body', req.body);
+  Game.create(req.body)
+  .then(function(response){
+    console.log('RESPONSE', response);
+    if(response) console.log('Successfully Saved');
+    res.sendStatus(204);
+  }).catch(function(err){
+    console.log(err);
+    next(err);
+  });
 });
-
-
-app.get('/favicon.ico', function(req, res, next){
-  next();
-})
 
 app.use(function(err, req, res, next){
   res.send(err);
